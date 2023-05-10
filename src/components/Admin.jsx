@@ -6,6 +6,7 @@ import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
 import axios from 'axios';
 import {Link,useNavigate} from 'react-router-dom'
+import './Admin.css'
 
 
 function Admin() {
@@ -74,6 +75,11 @@ function Admin() {
      <Button variant="secondary" className='text-white fw-bold border-5'>Cancel</Button>{' '}
      
      </Link> 
+      <div className='mt-1'>
+      <a href="/register" className='a_link fw-bold'>You are a new user register here</a>
+
+      </div>
+
      
      </Form>
 

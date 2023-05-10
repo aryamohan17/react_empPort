@@ -29,7 +29,7 @@ function Add() {
    const result=await axios.post('http://localhost:8000/addEmployee',body)
    console.log(result);
    alert(result.data.message)
-   location('/')
+   location('/home')
     // console.log(body);
     // console.log(id);
     // console.log(uname);
@@ -58,7 +58,7 @@ function Add() {
         <Form.Control onChange={(e)=>setSalary(e.target.value)} type="text" placeholder="" />
       </Form.Group>
       <Button onClick={(e)=>addEmployee(e)}  variant="primary" className='text-white fw-bold border-5'>Add</Button>{' '}
-     <Link to={'/'}>
+     <Link to={'/home'}>
      <Button variant="secondary" className='text-white fw-bold border-5'>Cancel</Button>{' '}
      
      </Link> 

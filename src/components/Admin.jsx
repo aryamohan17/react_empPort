@@ -1,11 +1,37 @@
 import {React,useState,useEffect} from 'react'
+import Form from 'react-bootstrap/Form';
+import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
-import Carousel from 'react-bootstrap/Carousel';
+import axios from 'axios';
+import {Link,useNavigate} from 'react-router-dom'
 
 
 function Admin() {
+
+  const[Email,setEmail]=useState('')
+
+  const [password,setPassword]=useState('')
+  let location = useNavigate()
+
+  const loginEmployee=async (e)=>{
+      e.preventDefault()
+      // console.log((uuid().slice(0,3)));
+      const body={
+        Email,password
+      }
+     const result=await axios.post('http://localhost:8000/loginEmployee',body)
+  //    console.log(result);
+     alert(result.data.message)
+     location('/home')
+      // console.log(body);
+      // console.log(id);
+      // console.log(uname);
+      // console.log(age);
+      // console.log(desig);
+      // console.log(salary);
+    }
  
   return (
     <div>
@@ -19,56 +45,38 @@ function Admin() {
               height="30"
               className="d-inline-block align-top"
             />{' '}
-             Tata Consultancy
+             Tata Consultancy service
           </Navbar.Brand>
           <Nav>
-            <Nav.Link href="register"><i class="fa-solid fa-user"></i> Login</Nav.Link>
-            <Nav.Link eventKey={2} href="home">
-             Employee portal
+            {/* <Nav.Link href="register"><i class="fa-solid fa-user"></i> Login</Nav.Link> */}
+            <Nav.Link eventKey={2} >
+              <h3>Employee portal</h3>
             </Nav.Link>
           </Nav>
         </Container>
       </Navbar>
 
-      <Carousel>
-      <Carousel.Item>
-        <img
-          className="d-block w-100"
-          src="holder.js/800x400?text=First slide&bg=373940"
-          alt="First slide"
-        />
-        <Carousel.Caption>
-          <h3>First slide label</h3>
-          <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
-        </Carousel.Caption>
-      </Carousel.Item>
-      <Carousel.Item>
-        <img
-          className="d-block w-100"
-          src="holder.js/800x400?text=Second slide&bg=282c34"
-          alt="Second slide"
-        />
+      <Form className='p-5 w-50 container'> 
+      <h1>Login</h1>
 
-        <Carousel.Caption>
-          <h3>Second slide label</h3>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-        </Carousel.Caption>
-      </Carousel.Item>
-      <Carousel.Item>
-        <img
-          className="d-block w-100"
-          src="holder.js/800x400?text=Third slide&bg=20232a"
-          alt="Third slide"
-        />
+<Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+        <Form.Label>Email</Form.Label>
+        <Form.Control onChange={(e)=>setEmail(e.target.value)} type="email" placeholder="" />
+      </Form.Group>
+      <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+        <Form.Label>Password</Form.Label>
+        <Form.Control onChange={(e)=>setPassword(e.target.value)} type="password" placeholder="" />
+      </Form.Group> 
+       
+     
+      <Button onClick={(e)=>loginEmployee(e)}  variant="primary" className='text-white fw-bold border-5'>Login</Button>{' '}
+     <Link to={'/'}>
+     <Button variant="secondary" className='text-white fw-bold border-5'>Cancel</Button>{' '}
+     
+     </Link> 
+     
+     </Form>
 
-        <Carousel.Caption>
-          <h3>Third slide label</h3>
-          <p>
-            Praesent commodo cursus magna, vel scelerisque nisl consectetur.
-          </p>
-        </Carousel.Caption>
-      </Carousel.Item>
-    </Carousel>
     </div>
   )
 }

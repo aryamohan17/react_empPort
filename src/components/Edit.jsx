@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
-import { Link, useParams } from 'react-router-dom'
+import { Link, useParams,useNavigate } from 'react-router-dom'
 import axios from 'axios';
 
 
@@ -14,6 +14,7 @@ function Edit() {
 
   const params = useParams()
   console.log(params.id);
+  let location = useNavigate()
 
   const fetchEmp = async () => {
     const result = await axios.get('http://localhost:8000/getemployee/' + params.id)
@@ -32,6 +33,8 @@ function Edit() {
     }
     const result = await axios.post('http://localhost:8000/editEmp', body)
     alert(result.data.message)
+    location('/home')
+
     // alert(result.data.message)
     // console.log(result);
   }
